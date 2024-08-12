@@ -1,39 +1,43 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Navbar from './component/Navbar'
+import Home from './component/Home'
+import About from './component/About'
+import Contact from './component/Contact_us'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [check, checkFunc] = useState("test")
 
-  const [box, toggle] = useState(true)
+  let router = createBrowserRouter([
+    {
+      path: '/',
+      element: <><Navbar /> <Home /></>
+    },
+    {
+      path: '/about',
+      element: <><Navbar /> <About /></>
+    },
+    {
+      path: '/contact',
+      element: <><Navbar /> <Contact /></>
+    },
+    {
+      path: '/',
+      element: <><Navbar /> <Contact /></>
+    }
+  ])
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <button onClick={() => toggle((box) => !box)}>hide toggle</button>
-        {box? <div className="box">ok i am done</div>: <div className="box">i am not done yet</div>}
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {check == "test"?<button onClick={() => checkFunc("test1")}>Hello Universe</button>: <button onClick={() => checkFunc("test")}>"Hello World"</button>}
+
+      <RouterProvider router={(router)} />
     </>
   )
 }
 
 export default App
+
+
