@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Search_panel.css'
 
 const Search_panel = ({ fetchTodo }) => {
-    const [task, setTask] = useState([]);
+    const [task, setTask] = useState('');
 
     const handlerAdd = () => {
         axios.post(`http://localhost:3000/add`, { task })
@@ -17,7 +17,7 @@ const Search_panel = ({ fetchTodo }) => {
     return (
         <>
             <div className="todo-input-box">
-                <input type="text" name="todo_input" value={task} onChange={(e) => setTask(e.target.value)} className="todo-input" />
+                <textarea type="text" name="todo_input" value={task} onChange={(e) => setTask(e.target.value)} className="todo-input"></textarea>
                 <div className="add-todo-button-box">
                     <input type="button" value="ADD" onClick={handlerAdd} className="add-todo-button" />
                 </div>
